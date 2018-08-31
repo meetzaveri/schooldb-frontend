@@ -1,4 +1,5 @@
 export const API = {
     login: '',
-    register: ''
+    register: '',
+    getStudents: 'https://jsonplaceholder.typicode.com/users'
 }

@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import {Link} from "react-router-dom";
 import {
   Grid,
   Row,
@@ -12,6 +13,7 @@ import {
   Radio
 } from 'react-bootstrap'
 import PropTypes from 'prop-types';
+import {routes} from '../../routes/routes';
 
 function FieldGroup({
   id,
@@ -100,9 +102,27 @@ const Register = ({state, actions}) => {
               label="Password"
               type="password"
               placeholder="Enter password"/>
+            <FormGroup>
+              <Radio
+                name="radiostudent"
+                checked={state.radiostudent}
+                onChange={(e) => actions.onHandleSelectRole(e)}>
+                Student
+              </Radio>{' '}
+              <Radio
+                name="radioteacher"
+                checked={state.radioteacher}
+                onChange={(e) => actions.onHandleSelectRole(e)}>
+                Teacher
+              </Radio>{' '}
+            </FormGroup>
 
             <Button type="submit">Register</Button>
           </form>
+          <Link to={routes.login}>
+            <h3>Back to Login
+            </h3>
+          </Link>
         </Row>
       </Grid>;
     </Fragment>

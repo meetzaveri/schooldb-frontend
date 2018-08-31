@@ -4,6 +4,7 @@ export const loginreducer = (state = {
   data: [],
   onLoading: false,
   onLoadingFormSubmit: false,
+  role: '',
   error: ''
 }, action) => {
   switch (action.type) {
@@ -18,7 +19,7 @@ export const loginreducer = (state = {
     case lg_a.LoginActionSucceded:
 
       console.log('Action in login request success', action);
-      let loginOnSuccess = action.data;
+      let loginOnSuccess = action.payload;
       if (loginOnSuccess) {
         state = {
           ...state,

@@ -1,9 +1,10 @@
 import {register_actions} from './actions';
 
 export const registerreducer = (state = {
-  data: [],
+  payloaddata: [],
   onLoading: false,
   onLoadingFormSubmit: false,
+  role: '',
   error: ''
 }, action) => {
   switch (action.type) {
@@ -18,11 +19,11 @@ export const registerreducer = (state = {
     case register_actions.RegisterActionSucceded:
 
       console.log('Action in register request success', action);
-      let registerSuccess = action.data;
+      let registerSuccess = action.payload;
       if (registerSuccess) {
         state = {
           ...state,
-          data: registerSuccess,
+          payloaddata: registerSuccess,
           onLoading: false
         }
 
@@ -30,7 +31,7 @@ export const registerreducer = (state = {
       } else {
         state = {
           ...state,
-          data: [],
+          payloaddata: [],
           onLoading: false
         }
         return state;
@@ -39,11 +40,11 @@ export const registerreducer = (state = {
     case register_actions.RegisterActionFailed:
       state = {
         ...state,
-        data: [],
+        payloaddata: [],
         onLoading: false,
-        error: 'Error in register user action'
+        error: action.message
       }
-      console.log('Action in register request fail', action);
+      console.log('Action in register request fail', action.message);
       return state;
 
     default:

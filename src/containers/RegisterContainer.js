@@ -4,6 +4,7 @@ import {API} from '../api/api'
 import {connect} from 'react-redux';
 import {register_request} from '../components/register/actions';
 import PropTypes from 'prop-types';
+import {routes} from '../routes/routes'
 
 class RegisterContainer extends Component {
   constructor(props) {
@@ -13,7 +14,10 @@ class RegisterContainer extends Component {
       name: '',
       roll: '',
       email: '',
-      password: ''
+      password: '',
+      radiostudent: true,
+      radioteacher: false,
+      register: null
     }
   }
 
@@ -22,19 +26,55 @@ class RegisterContainer extends Component {
     this.setState({[name]: event.target.value});
   }
 
+  onHandleSelectRole = (event) => {
+    const name = event.target.name;
+    switch (name) {
+      case 'radiostudent':
+        this.setState({radiostudent: true, radioteacher: false});
+        break;
+      case 'radioteacher':
+        this.setState({radiostudent: false, radioteacher: true});
+        break;
+      default:
+        this.setState({radiostudent: true, radioteacher: false});
+        break;
+    }
+  }
+
+  componentWillReceiveProps(prevState) {
+    if (!prevState.register.onLoading) {
+      this
+        .props
+        .history
+        .replace(routes.index)
+    }
+  }
+
   onSubmitRegistration = () => {
     console.log('Submit form', this.state);
-    const {name, roll, email, password} = this.state;
+
+    const {
+      name,
+      roll,
+      email,
+      password,
+      radiostudent,
+      radioteacher
+    } = this.state;
+    const role = radioteacher
+      ? 'teacher'
+      : 'student'
     this
       .props
-      .registerUser({name, roll, email, password})
+      .registerUser({name, roll, email, password, role})
   }
 
   render() {
-    const {onHandleInputForRegistration, onSubmitRegistration} = this;
+    const {onHandleInputForRegistration, onSubmitRegistration, onHandleSelectRole} = this;
     const actions = {
       onHandleInputForRegistration,
-      onSubmitRegistration
+      onSubmitRegistration,
+      onHandleSelectRole
     }
     return (
       <div>
@@ -43,11 +83,12 @@ class RegisterContainer extends Component {
     );
   }
 }
+
 RegisterContainer.propTypes = {
   registerUser: PropTypes.func
 }
 
-const mapStateToProps = state => ({loginstatus: state.login});
+const mapStateToProps = state => ({register: state.register});
 const mapDispatchToProps = dispatch => {
   return {
     registerUser: (data) => dispatch(register_request({method: 'POST', url: API.register, data: data}))
