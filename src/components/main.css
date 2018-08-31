@@ -14,6 +14,14 @@
   margin-left: 12%;
 }
 
+.custom-form-register {
+  margin: 0px 0px 10px 0px;
+}
+
+.custom-form-login {
+  margin: 0px 0px 10px 0px;
+}
+
 .nav_box > li > a {
   border-radius: 0px !important;
 }
