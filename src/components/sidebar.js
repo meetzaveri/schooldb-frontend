@@ -1,8 +1,9 @@
 import React, {Fragment} from 'react';
 import './main.css'
 import {Col, Nav, NavItem} from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
-const Sidebar = (props) => {
+const Sidebar = ({selecedPane, routeToMap}) => {
     return (
         <Fragment>
             <Col
@@ -14,10 +15,10 @@ const Sidebar = (props) => {
                 style={{
                 padding: '0px'
             }}>
-                <Nav className="nav_box" bsStyle="pills" stacked activeKey={props.selecedPane}>
+                <Nav className="nav_box" bsStyle="pills" stacked activeKey={selecedPane}>
                     <NavItem
                         eventKey={1}
-                        href={props.routeToMap}
+                        href={routeToMap}
                         style={{
                         border: '0px'
                     }}>
@@ -30,6 +31,11 @@ const Sidebar = (props) => {
             </Col>
         </Fragment>
     );
+}
+
+Sidebar.propTypes = {
+    selecedPane: PropTypes.number,
+    routeToMap: PropTypes.string
 }
 
 export default Sidebar;
