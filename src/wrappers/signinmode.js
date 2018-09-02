@@ -24,7 +24,6 @@ export const signInMode = (Component, role) => {
     render() {
       const roleFromLocalStorage = localStorage.getItem("userrole");
       const { hasApiCalled } = this.state;
-      console.log("In render", roleFromLocalStorage === role);
       return hasApiCalled ? (
         <Fragment>
           {roleFromLocalStorage === role ? (

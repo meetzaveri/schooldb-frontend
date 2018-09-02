@@ -4,7 +4,7 @@ import { Col, Nav, NavItem } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { routes } from "../../routes/routes";
 
-const Sidebar = ({ selecedPane, routeToMap }) => {
+const Sidebar = ({ selecedPane, routeToMap, secondaryRoute }) => {
   return (
     <Fragment>
       <Col
@@ -35,8 +35,11 @@ const Sidebar = ({ selecedPane, routeToMap }) => {
           <NavItem eventKey={2} href="/profile" title="Item">
             Profile
           </NavItem>
+          <NavItem eventKey={3} href={secondaryRoute} title="Item">
+            Resources
+          </NavItem>
           <NavItem
-            eventKey={3}
+            eventKey={4}
             href={routes.index}
             onClick={e => {
               localStorage.removeItem("token");

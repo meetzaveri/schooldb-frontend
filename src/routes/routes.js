@@ -5,6 +5,6 @@ export const routes = {
   profile: "/profile",
   resources: "/resources",
   teacher: "/teacher",
-  sendresource: "/sendresource",
+  sendmarksheet: "/sendmarksheet",
   student: "/student"
 };

@@ -14,7 +14,7 @@ class LoginContainer extends Component {
       email: "",
       password: "",
       loginstatus: null,
-      showWarning: null,
+      showWarning: this.props.loginstatus.error,
       showWarningOnError: false
     };
   }
@@ -28,7 +28,7 @@ class LoginContainer extends Component {
   onHandleInput = event => {
     console.log("event triggered", event);
     const name = event.target.name;
-    this.setState({ [name]: event.target.value, showWarningOnError: false });
+    this.setState({ [name]: event.target.value, showWarning: false });
   };
 
   onSubmit = () => {
@@ -40,6 +40,8 @@ class LoginContainer extends Component {
   render() {
     const { onHandleInput, onSubmit } = this;
     const { loginstatus } = this.props;
+    const { showWarning } = this.state;
+    let showError = loginstatus.error;
     // console.log("loginstatus", loginstatus);
     const actions = {
       onHandleInput,

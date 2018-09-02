@@ -1,10 +1,12 @@
-import { fetchstudents_actions } from "./actions";
+import { fetchstudents_actions, upload_marksheets } from "./actions";
 
 export const t_reducer = (
   state = {
     studentlist: [],
     onLoading: false,
-    error: null
+    onGoingUpload: false,
+    error: null,
+    uploadError: null
   },
   action
 ) => {
@@ -45,6 +47,32 @@ export const t_reducer = (
         error: action.message
       };
       console.log("Request fail : ", action.message);
+      return state;
+
+    case upload_marksheets.UploadMarksheetRequested:
+      state = {
+        ...state,
+        onLoading: true,
+        onGoingUpload: true
+      };
+      return state;
+
+    case upload_marksheets.UploadMarksheetSucceded:
+      console.log("Upload marksheet success", action);
+      state = {
+        ...state,
+        onLoading: true,
+        onGoingUpload: false
+      };
+      return state;
+
+    case upload_marksheets.UploadMarksheetFailed:
+      state = {
+        ...state,
+        onLoading: true,
+        onGoingUpload: false,
+        uploadError: action.message
+      };
       return state;
 
     default:

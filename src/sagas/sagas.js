@@ -8,7 +8,10 @@ import {
 } from "../services/index";
 import { login_actions } from "../components/login/actions";
 import { register_actions } from "../components/register/actions";
-import { fetchstudents_actions } from "../components/teacher/actions";
+import {
+  fetchstudents_actions,
+  upload_marksheets
+} from "../components/teacher/actions";
 
 // worker Saga: will be fired on event of actions
 function* LoginSaga(action) {
@@ -59,6 +62,24 @@ function* GetStudentLists(action) {
   }
 }
 
+function* UploadMarksheet(action) {
+  try {
+    console.log("Saga in use for upload marksheet operation");
+    const uploadmarksheet = yield call(ApiCallForStudentsLists, action.payload);
+    console.log("uploadmarksheet", uploadmarksheet);
+    yield put({
+      type: upload_marksheets.UploadMarksheetSucceeded,
+      payload: userlists
+    });
+  } catch (e) {
+    console.log("Into catch block");
+    yield put({
+      type: upload_marksheets.UploadMarksheetFailed,
+      message: e.message
+    });
+  }
+}
+
 /*
     Alternatively you may use takeLatest.
 
@@ -74,6 +95,7 @@ function* mySaga() {
     fetchstudents_actions.FetchStudentRequested,
     GetStudentLists
   );
+  yield takeLatest(upload_marksheets.UploadMarksheetRequested, UploadMarksheet);
 }
 
 export default mySaga;

@@ -22,9 +22,12 @@ class TeacherContainer extends Component {
 
     return (
       <Errorboundary>
-        <Sidebar selecedPane={1} routeToMap={routes.teacher}>
-          Sidebar
-        </Sidebar>
+        <Sidebar
+          selecedPane={1}
+          routeToMap={routes.teacher}
+          secondaryRoute={routes.teacher + routes.sendmarksheet}
+        />
+
         <Content>
           <TeacherComponent lists={teacher.studentlist.data} />
         </Content>
