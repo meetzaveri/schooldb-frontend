@@ -7,7 +7,10 @@ import { routes } from "../routes/routes";
 import { API } from "../api/api";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { fetch_students_request } from "../components/teacher/actions";
+import {
+  fetch_students_request,
+  upload_marksheets_request
+} from "../components/teacher/actions";
 
 class SendMarksheetContainer extends Component {
   constructor(props) {
@@ -19,6 +22,15 @@ class SendMarksheetContainer extends Component {
   }
   onSubmitMarksheet = src => {
     console.log("src in onsubmitmarksheet", src);
+    const token = localStorage.getItem("token");
+    const userid_forupload = localStorage.getItem("userid_forupload");
+    const profileId_forupload = localStorage.getItem("profileId_forupload");
+    this.props.uploadMarksheet(
+      src,
+      token,
+      userid_forupload,
+      profileId_forupload
+    );
   };
   render() {
     const { teacher } = this.props;
@@ -45,6 +57,7 @@ class SendMarksheetContainer extends Component {
 
 SendMarksheetContainer.propTypes = {
   fetchStudentData: PropTypes.func,
+  uploadMarksheet: PropTypes.func,
   teacher: PropTypes.object
 };
 const mapStateToProps = state => ({ teacher: state.state_teacher });
@@ -57,6 +70,18 @@ const mapDispatchToProps = dispatch => {
           url: API.getStudents,
           method: "GET",
           data: {},
+          header: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token
+          }
+        })
+      ),
+    uploadMarksheet: (content, token, userid_forupload, profileId_forupload) =>
+      dispatch(
+        upload_marksheets_request({
+          url: API.uploadMarksheet + userid_forupload,
+          method: "PUT",
+          data: { content, profile_id: profileId_forupload },
           header: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + token

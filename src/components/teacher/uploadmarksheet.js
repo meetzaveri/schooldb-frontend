@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from "react";
 import { DropdownButton, MenuItem, ButtonToolbar } from "react-bootstrap";
 import Loadable from "react-loadable";
+import PropTypes from "prop-types";
 
 const RenderDropdownButton = props => {
   console.log("props.listsForDropdown", props.listsForDropdown);
@@ -10,13 +11,22 @@ const RenderDropdownButton = props => {
       key={index}
       eventKey={index}
       onSelect={() =>
-        props.onSelectDropdownItem(item._id, item.name, item.email)
+        props.onSelectDropdownItem(
+          item._id,
+          item.name,
+          item.email,
+          item.profile_id
+        )
       }
     >
       {`${item.name} (${item.email})`}
     </MenuItem>
   ));
   return renderDropdwn;
+};
+
+RenderDropdownButton.propTypes = {
+  listsForDropdown: PropTypes.array
 };
 
 const Loading = () => <div>Loading ...</div>;
@@ -41,13 +51,15 @@ class UploadMarksheet extends Component {
     // console.log("src on postsubmit", blobDataFromLS);
     this.props.onSubmitMarksheet(blobDataFromLS);
   };
-  onSelectDropdownItem = (id, name, email) => {
+  onSelectDropdownItem = (id, name, email, profile_id) => {
     console.log("on select dropdown", id);
     this.setState({
       disableFileInput: false,
       selectedUserName: name,
       selectedUserEmail: email
     });
+    localStorage.setItem("userid_forupload", id);
+    localStorage.setItem("profileId_forupload", profile_id);
   };
   render() {
     const { onPostSubmit, onSelectDropdownItem } = this;
@@ -59,7 +71,7 @@ class UploadMarksheet extends Component {
     return (
       <Fragment>
         <h2>Send marksheets</h2>
-        <h4>Step 1 : Select Student to send marksheet</h4>
+        <h4>Select Student to send marksheet</h4>
         <ButtonToolbar>
           <DropdownButton
             bsStyle="primary"
@@ -83,8 +95,8 @@ class UploadMarksheet extends Component {
             <div style={{ padding: "10px 10px" }} />
             <h4>
               {" "}
-              Step 2 : After selecting student, select appropriate
-              file(marksheet in pdf format)
+              After selecting student, select appropriate file(marksheet in pdf
+              format)
             </h4>
             <InputWrapperLoader
               disable={disableFileInput}
@@ -96,5 +108,9 @@ class UploadMarksheet extends Component {
     );
   }
 }
+
+UploadMarksheet.propTypes = {
+  onSubmitMarksheet: PropTypes.func
+};
 
 export default UploadMarksheet;

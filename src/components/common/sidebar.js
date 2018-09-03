@@ -35,9 +35,11 @@ const Sidebar = ({ selecedPane, routeToMap, secondaryRoute }) => {
           <NavItem eventKey={2} href="/profile" title="Item">
             Profile
           </NavItem>
-          <NavItem eventKey={3} href={secondaryRoute} title="Item">
-            Resources
-          </NavItem>
+          {secondaryRoute && (
+            <NavItem eventKey={3} href={secondaryRoute} title="Item">
+              Resources
+            </NavItem>
+          )}
           <NavItem
             eventKey={4}
             href={routes.index}

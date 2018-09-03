@@ -82,7 +82,7 @@ export const ApiCallForUploadMarksheets = params => {
     ApiCall(params.url, params.method, params.data, params.header)
       .then(responseJson => {
         responseObjToBeSend = {
-          message: "Data Fetched successfully",
+          message: "Marksheet uploaded successfully",
           data: responseJson
         };
 

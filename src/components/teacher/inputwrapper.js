@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class FileInput extends React.Component {
   constructor(props) {
@@ -41,11 +42,17 @@ class FileInput extends React.Component {
         </label>
         <br />
         <button disabled={this.props.disable} type="submit">
-          Submit <i className="fa fa-spinner fa-spin" />
+          Submit
+          {/* i className="fa fa-spinner fa-spin" /> */}
         </button>
       </form>
     );
   }
 }
+
+FileInput.propTypes = {
+  disable: PropTypes.bool,
+  onPostSubmitAction: PropTypes.func
+};
 
 export default FileInput;

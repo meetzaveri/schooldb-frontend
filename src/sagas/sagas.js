@@ -3,6 +3,7 @@ import {
   fakeApiCall_Login,
   fakeApiCall_Register,
   ApiCallForStudentsLists,
+  ApiCallForUploadMarksheets,
   ApiCallForLogin,
   ApiCallForRegistration
 } from "../services/index";
@@ -65,11 +66,14 @@ function* GetStudentLists(action) {
 function* UploadMarksheet(action) {
   try {
     console.log("Saga in use for upload marksheet operation");
-    const uploadmarksheet = yield call(ApiCallForStudentsLists, action.payload);
+    const uploadmarksheet = yield call(
+      ApiCallForUploadMarksheets,
+      action.payload
+    );
     console.log("uploadmarksheet", uploadmarksheet);
     yield put({
       type: upload_marksheets.UploadMarksheetSucceeded,
-      payload: userlists
+      payload: uploadmarksheet
     });
   } catch (e) {
     console.log("Into catch block");
