@@ -47,12 +47,11 @@ class UploadMarksheet extends Component {
     };
   }
   onPostSubmit = src => {
-    const blobDataFromLS = localStorage.getItem("src");
-    // console.log("src on postsubmit", blobDataFromLS);
-    this.props.onSubmitMarksheet(blobDataFromLS);
+    // console.log("src on postsubmit", src);
+    this.props.onSubmitMarksheet(src);
   };
   onSelectDropdownItem = (id, name, email, profile_id) => {
-    console.log("on select dropdown", id);
+    // console.log("on select dropdown", id);
     this.setState({
       disableFileInput: false,
       selectedUserName: name,
@@ -98,6 +97,7 @@ class UploadMarksheet extends Component {
               After selecting student, select appropriate file(marksheet in pdf
               format)
             </h4>
+            <h4>Constraint : Select PDF file with maximum of 2 pages</h4>
             <InputWrapperLoader
               disable={disableFileInput}
               onPostSubmitAction={onPostSubmit}

@@ -46,6 +46,9 @@ const Sidebar = ({ selecedPane, routeToMap, secondaryRoute }) => {
             onClick={e => {
               localStorage.removeItem("token");
               localStorage.removeItem("userrole");
+              localStorage.removeItem("profileId_forupload");
+              localStorage.removeItem("userid_forupload");
+              localStorage.removeItem("userid");
             }}
             title="Item"
           >

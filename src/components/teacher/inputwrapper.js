@@ -8,6 +8,7 @@ class FileInput extends React.Component {
       src: "#"
     };
   }
+
   handleSubmit = event => {
     event.preventDefault();
     console.log("this.fileInput", this.fileInput);
@@ -18,7 +19,6 @@ class FileInput extends React.Component {
       localStorage.setItem("src", s);
     };
     var src = localStorage.getItem("src");
-    // console.log("SRC", src);
     reader.readAsDataURL(file);
     this.setState({ src: src }, () => {
       // console.log("STATE", this.state);

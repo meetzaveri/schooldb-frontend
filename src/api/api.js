@@ -2,7 +2,8 @@ export const API = {
   login: "http://localhost:8000/login",
   register: "http://localhost:8000/register",
   getStudents: "http://localhost:8000/studentslist",
-  uploadMarksheet: "http://localhost:8000/student/"
+  uploadMarksheet: "http://localhost:8000/student/",
+  getStudentData: "http://localhost:8000/student"
 };
 
 export function ApiCall(apiName, methodType, data, header) {

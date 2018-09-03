@@ -21,7 +21,7 @@ class SendMarksheetContainer extends Component {
     this.props.fetchStudentData();
   }
   onSubmitMarksheet = src => {
-    console.log("src in onsubmitmarksheet", src);
+    console.log("src on final one send", src);
     const token = localStorage.getItem("token");
     const userid_forupload = localStorage.getItem("userid_forupload");
     const profileId_forupload = localStorage.getItem("profileId_forupload");
@@ -63,6 +63,7 @@ SendMarksheetContainer.propTypes = {
 const mapStateToProps = state => ({ teacher: state.state_teacher });
 const mapDispatchToProps = dispatch => {
   const token = localStorage.getItem("token");
+
   return {
     fetchStudentData: () =>
       dispatch(
@@ -81,7 +82,10 @@ const mapDispatchToProps = dispatch => {
         upload_marksheets_request({
           url: API.uploadMarksheet + userid_forupload,
           method: "PUT",
-          data: { content, profile_id: profileId_forupload },
+          data: {
+            content,
+            profile_id: profileId_forupload
+          },
           header: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + token

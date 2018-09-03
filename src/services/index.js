@@ -116,3 +116,24 @@ export const ApiCallForStudentsLists = params => {
       });
   });
 };
+
+export const ApiCallForStudentData = params => {
+  return new Promise((resolve, reject) => {
+    let data = null;
+
+    ApiCall(params.url, params.method, params.data, params.header)
+      .then(responseJson => {
+        responseObjToBeSend = {
+          message: "Student Data Fetched successfully",
+          data: responseJson
+        };
+
+        resolve(responseObjToBeSend);
+      })
+      .catch(err => {
+        let error = err;
+        responseObjToBeSend.message = error;
+        reject(responseObjToBeSend);
+      });
+  });
+};

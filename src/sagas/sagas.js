@@ -1,11 +1,10 @@
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import {
-  fakeApiCall_Login,
-  fakeApiCall_Register,
   ApiCallForStudentsLists,
   ApiCallForUploadMarksheets,
   ApiCallForLogin,
-  ApiCallForRegistration
+  ApiCallForRegistration,
+  ApiCallForStudentData
 } from "../services/index";
 import { login_actions } from "../components/login/actions";
 import { register_actions } from "../components/register/actions";
@@ -13,6 +12,7 @@ import {
   fetchstudents_actions,
   upload_marksheets
 } from "../components/teacher/actions";
+import { getstudentdata_actions } from "../components/student/actions";
 
 // worker Saga: will be fired on event of actions
 function* LoginSaga(action) {
@@ -84,6 +84,24 @@ function* UploadMarksheet(action) {
   }
 }
 
+function* GetStudentData(action) {
+  try {
+    console.log("Saga in use for fetch specifc student data operation");
+    const studentdata = yield call(ApiCallForStudentData, action.payload);
+    console.log("studentdata", studentdata);
+    yield put({
+      type: getstudentdata_actions.GetStudentDataActionSucceeded,
+      payload: studentdata
+    });
+  } catch (e) {
+    console.log("Into catch block");
+    yield put({
+      type: getstudentdata_actions.GetStudentDataActionFailed,
+      message: e.message
+    });
+  }
+}
+
 /*
     Alternatively you may use takeLatest.
 
@@ -100,6 +118,10 @@ function* mySaga() {
     GetStudentLists
   );
   yield takeLatest(upload_marksheets.UploadMarksheetRequested, UploadMarksheet);
+  yield takeLatest(
+    getstudentdata_actions.GetStudentDataActionRequest,
+    GetStudentData
+  );
 }
 
 export default mySaga;

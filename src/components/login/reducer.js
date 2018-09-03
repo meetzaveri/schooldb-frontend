@@ -21,15 +21,19 @@ export const loginreducer = (
     case lg_a.LoginActionSucceded:
       console.log("Action in login request success", action);
       let loginOnSuccess = action.payload;
+
+      localStorage.removeItem("src");
       if (loginOnSuccess) {
         localStorage.setItem("token", loginOnSuccess.data.token);
         localStorage.setItem("userrole", loginOnSuccess.data.role);
+        localStorage.setItem("userid", action.payload.data.id);
         state = {
           ...state,
           data: loginOnSuccess,
           onLoading: false,
           loginsuccess: true,
-          role: loginOnSuccess.data.role
+          role: loginOnSuccess.data.role,
+          userid: action.payload.data.id
         };
 
         return state;
