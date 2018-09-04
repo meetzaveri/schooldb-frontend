@@ -97,7 +97,7 @@ class UploadMarksheet extends Component {
               After selecting student, select appropriate file(marksheet in pdf
               format)
             </h4>
-            <h4>Constraint : Select PDF file with maximum of 2 pages</h4>
+            <h4>**Constraint : Select PDF file with maximum of 2 pages**</h4>
             <InputWrapperLoader
               disable={disableFileInput}
               onPostSubmitAction={onPostSubmit}
@@ -110,7 +110,8 @@ class UploadMarksheet extends Component {
 }
 
 UploadMarksheet.propTypes = {
-  onSubmitMarksheet: PropTypes.func
+  onSubmitMarksheet: PropTypes.func,
+  listsForDropdown: PropTypes.array
 };
 
 export default UploadMarksheet;

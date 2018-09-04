@@ -50,14 +50,7 @@ class RegisterContainer extends Component {
   onSubmitRegistration = () => {
     console.log("Submit form", this.state);
 
-    const {
-      name,
-      roll_no,
-      email,
-      password,
-      radiostudent,
-      radioteacher
-    } = this.state;
+    const { name, roll_no, email, password, radioteacher } = this.state;
     const role = radioteacher ? "teacher" : "student";
     this.props.registerUser({
       name,
@@ -80,9 +73,9 @@ class RegisterContainer extends Component {
       onHandleSelectRole
     };
     return (
-      <div>
+      <Fragment>
         <Register state={this.state} actions={actions} />
-      </div>
+      </Fragment>
     );
   }
 }

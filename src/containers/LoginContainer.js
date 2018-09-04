@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import Errorboundary from "../wrappers/errorboundary";
 import Login from "../components/login/login";
 import { login_request } from "../components/login/actions";
 import { API } from "../api/api";
@@ -26,13 +27,13 @@ class LoginContainer extends Component {
   }
 
   onHandleInput = event => {
-    console.log("event triggered", event);
+    // console.log("event triggered", event);
     const name = event.target.name;
     this.setState({ [name]: event.target.value, showWarning: false });
   };
 
   onSubmit = () => {
-    console.log("this.state", this.state);
+    // console.log("this.state", this.state);
     const { email, password } = this.state;
     this.props.loginAction({ email, password });
   };
@@ -40,23 +41,28 @@ class LoginContainer extends Component {
   render() {
     const { onHandleInput, onSubmit } = this;
     const { loginstatus } = this.props;
-    const { showWarning } = this.state;
-    let showError = loginstatus.error;
     // console.log("loginstatus", loginstatus);
     const actions = {
       onHandleInput,
       onSubmit
     };
     return (
-      <div>
-        <Login state={this.state} actions={actions} loginstatus={loginstatus} />
-      </div>
+      <Errorboundary>
+        <Fragment>
+          <Login
+            state={this.state}
+            actions={actions}
+            loginstatus={loginstatus}
+          />
+        </Fragment>
+      </Errorboundary>
     );
   }
 }
 
 LoginContainer.propTypes = {
-  loginAction: PropTypes.func
+  loginAction: PropTypes.func,
+  loginstatus: PropTypes.object
 };
 
 const mapStateToProps = state => ({ loginstatus: state.login });

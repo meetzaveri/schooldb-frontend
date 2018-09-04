@@ -1,33 +1,14 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import {
-  Grid,
-  Row,
-  Col,
-  FormGroup,
-  FormControl,
-  Checkbox,
-  ControlLabel,
-  Button,
-  HelpBlock,
-  Radio
-} from "react-bootstrap";
+import { Grid, Row, FormGroup, Button, Radio } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { routes } from "../../routes/routes";
 
-function FieldGroup({ id, label, help, ...props }) {
-  return (
-    <FormGroup controlId={id}>
-      <ControlLabel>{label}</ControlLabel>
-      <FormControl {...props} /> {help && <HelpBlock>{help}</HelpBlock>}
-    </FormGroup>
-  );
-}
 const Register = ({ state, actions }) => {
-  const styles = {
-    // "font-size": "24px"
-    marginLeft: "12px"
-  };
+  // const styles = {
+  //   // "font-size": "24px"
+  //   marginLeft: "12px"
+  // };
   return (
     <Fragment>
       <Grid>

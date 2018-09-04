@@ -48,11 +48,6 @@ const SendMarksheetContainer = Loadable({
   loading: Loading
 });
 
-const ResourceContainerLoader = Loadable({
-  loader: () => import("./containers/ResourceContainer"),
-  loading: Loading
-});
-
 class App extends Component {
   render() {
     return (
@@ -84,11 +79,6 @@ class App extends Component {
                 exact
                 path={routes.student}
                 component={PermissionWrapper(StudentContainerLoader, "student")}
-              />
-              <Route
-                exact
-                path={routes.resources}
-                component={AuthWrapper(ResourceContainerLoader)}
               />
               <Route
                 exact

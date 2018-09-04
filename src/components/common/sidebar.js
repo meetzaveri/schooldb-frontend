@@ -32,9 +32,9 @@ const Sidebar = ({ selecedPane, routeToMap, secondaryRoute }) => {
           >
             Home
           </NavItem>
-          <NavItem eventKey={2} href="/profile" title="Item">
+          {/* <NavItem eventKey={2} href="/profile" title="Item">
             Profile
-          </NavItem>
+          </NavItem> */}
           {secondaryRoute && (
             <NavItem eventKey={3} href={secondaryRoute} title="Item">
               Resources

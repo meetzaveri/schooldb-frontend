@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from "react";
-import { Grid, Col, Nav, NavItem, Table } from "react-bootstrap";
+import { Grid, Table } from "react-bootstrap";
 import ModalBox from "./modal";
 
 const ListRender = props => {

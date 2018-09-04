@@ -26,7 +26,11 @@ class StudentContainer extends Component {
           Sidebar
         </Sidebar>
         <Content>
-          <StudentComponent studentdata={student.data.data} />
+          {student.fetchStatus ? (
+            <StudentComponent studentdata={student.data.data} />
+          ) : (
+            <div> Loading ... </div>
+          )}
         </Content>
       </Errorboundary>
     );

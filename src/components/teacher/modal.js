@@ -1,16 +1,6 @@
 import React, { Fragment, Component } from "react";
-import {
-  Grid,
-  Col,
-  Modal,
-  Popover,
-  Button,
-  Tooltip,
-  OverlayTrigger,
-  Nav,
-  NavItem,
-  Table
-} from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 class ModalComponent extends Component {
   constructor(props, context) {
@@ -33,12 +23,6 @@ class ModalComponent extends Component {
   }
 
   render() {
-    const popover = (
-      <Popover id="modal-popover" title="popover">
-        very popover. such engagement
-      </Popover>
-    );
-    const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
     const { showModal, showModalRecord } = this.props.state;
     const { handleCloseModal } = this.props;
     return (
@@ -64,5 +48,10 @@ class ModalComponent extends Component {
     );
   }
 }
+
+ModalComponent.propTypes = {
+  state: PropTypes.object,
+  handleCloseModal: PropTypes.func
+};
 
 export default ModalComponent;

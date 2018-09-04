@@ -13,6 +13,7 @@ const Student = props => {
       {props.studentdata && (
         <div>
           <iframe
+            title="student-marksheet"
             style={{ height: "500px", width: "500px" }}
             src={props.studentdata.resources}
           />

@@ -7,7 +7,6 @@ export const API = {
 };
 
 export function ApiCall(apiName, methodType, data, header) {
-  let customResponseFlag = false;
   const options = {
     method: methodType,
     headers: header || {
@@ -27,7 +26,6 @@ export function ApiCall(apiName, methodType, data, header) {
         } else if (response.status === 404) {
           reject("User not found");
         } else if (response.status === 500) {
-          customResponseFlag = true;
           reject(response);
         }
         return response.json();
