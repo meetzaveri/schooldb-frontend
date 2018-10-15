@@ -20,9 +20,9 @@ class LoginContainer extends Component {
     };
   }
 
-  componentWillReceiveProps(prevState) {
-    if (prevState.loginstatus.loginsuccess) {
-      this.props.history.replace(routes[prevState.loginstatus.role]);
+  componentWillReceiveProps(prevProps) {
+    if (prevProps.loginstatus.loginsuccess) {
+      this.props.history.replace(routes[prevProps.loginstatus.role]);
     }
   }
 
