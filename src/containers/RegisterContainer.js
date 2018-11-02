@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
 import Register from "../components/register/register";
 import { API } from "../api/api";
-import { connect } from "react-redux";
 import { register_request } from "../components/register/actions";
-import PropTypes from "prop-types";
 import { routes } from "../routes/routes";
 
 class RegisterContainer extends Component {
@@ -41,14 +42,14 @@ class RegisterContainer extends Component {
     }
   };
 
-  componentWillReceiveProps(prevState) {
-    if (!prevState.register.onLoading && !prevState.register.error) {
-      this.props.history.replace(routes.index);
-    }
+  componentDidUpdate(prevProps){
+     if (!prevProps.register.onLoading && !prevProps.register.error) {
+        this.props.history.replace(routes.index);
+      }
   }
 
   onSubmitRegistration = () => {
-    console.log("Submit form", this.state);
+//     console.log("Submit form", this.state);
 
     const { name, roll_no, email, password, radioteacher } = this.state;
     const role = radioteacher ? "teacher" : "student";
@@ -81,7 +82,7 @@ class RegisterContainer extends Component {
 }
 
 RegisterContainer.propTypes = {
-  registerUser: PropTypes.func
+  registerUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({ register: state.register });
